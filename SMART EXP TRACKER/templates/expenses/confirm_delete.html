@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block page_title %}Delete Expense{% endblock %}
+{% block content %}
+
+<div class="delete-card">
+  <div class="delete-icon"><i class="bi bi-trash3-fill"></i></div>
+  <h4 style="font-weight:800;margin-bottom:8px;">Delete Expense?</h4>
+  <p style="color:var(--text-muted);font-size:14px;margin-bottom:24px;">
+    This will permanently remove <strong>{{ expense.description }}</strong> (₹{{ expense.amount }}) from your records.
+  </p>
+
+  <div style="background:var(--bg);border-radius:var(--radius-sm);padding:16px;margin-bottom:24px;text-align:left;">
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+      <span style="color:var(--text-muted);">Description</span>
+      <span style="font-weight:600;">{{ expense.description }}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
+      <span style="color:var(--text-muted);">Amount</span>
+      <span style="font-weight:700;color:var(--danger);">₹{{ expense.amount }}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;">
+      <span style="color:var(--text-muted);">Date</span>
+      <span style="font-weight:600;">{{ expense.date|date:"d M Y" }}</span>
+    </div>
+  </div>
+
+  <form method="post" class="d-flex gap-3">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger flex-fill">
+      <i class="bi bi-trash-fill me-2"></i>Yes, Delete
+    </button>
+    <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary flex-fill">Cancel</a>
+  </form>
+</div>
+
+{% endblock %}
